@@ -94,7 +94,7 @@ def main():
         'Government':
                 'Example: Federal, local, and state government agencies,<br>including education, military, transit, and public health',
         'Construction':
-                'Example: Commercial and residential structures,<br>road construction and maintenance,power and<br>communication structures'
+                'Example: Commercial and residential structures,<br>road construction and maintenance, power and<br>communication structures'
     }
     # Update 'Description' column for base_case DataFrame
     base_case['Example'] = base_case['Industry'].map(industry_descriptions)
