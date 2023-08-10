@@ -26,10 +26,10 @@ def main():
     # Rename years
     # Create a dictionary to map years to their corresponding values
     year_mapping = {
-        2035: 5, 2040: 10, 2045: 15, 2050: 20,
-        2055: 25, 2060: 30, 2065: 35, 2070: 40,
-        2075: 45, 2080: 50, 2085: 55, 2090: 60,
-        2095: 65, 2100: 70, 2105: 75, 2109: 80
+        2035: '0-5', 2040: '5-10', 2045: '10-15', 2050: '15-20',
+        2055: '20-25', 2060: '25-30', 2065: '30-35', 2070: '35-40',
+        2075: '40-45', 2080: '45-50', 2085: '50-55', 2090: '55-60',
+        2095: '60-65', 2100: '65-70', 2105: '70-75', 2109: '75-80'
     }
 
     # year_mapping = {
@@ -83,12 +83,27 @@ def main():
     base_case = dataframes_by_scenario['Base Case']
     higher_receipt = dataframes_by_scenario['Higher Receipt']
 
-    # Create the "Description" column and fill it with "Description from Karen"
-    base_case['Description'] = 'Description from Karen'
-    higher_receipt['Description'] = 'Description from Karen'
+    # Create a dictionary to store industry descriptions
+    industry_descriptions = {
+        'Transportation, Information, and Utilities':
+                'Example: Air and ground transportation, Internet service,<br>telephone and satellite communications, publishing, power<br>generation and distribution, water treatment and distribution',
+        'Service and Trade':
+                'Example: Health care, performing arts, professional<br>services, retail and wholesale businesses',
+        'Mining, Manufacturing, and Agriculture':
+                'Example: Coal and metals mining, oil and gas production,<br>materials and goods manufacturing, beverage production,<br>bakeries, farming, forestry',
+        'Government':
+                'Example: Federal, local, and state government agencies,<br>including education, military, transit, and public health',
+        'Construction':
+                'Example: Commercial and residential structures,<br>road construction and maintenance, power<br>and communication structures'
+    }
+    # Update 'Description' column for base_case DataFrame
+    base_case['Example'] = base_case['Industry'].map(industry_descriptions)
+
+    # Update 'Description' column for higher_receipt DataFrame
+    higher_receipt['Example'] = higher_receipt['Industry'].map(industry_descriptions)
 
     # Round the 'Value' column to the nearest integer
-    base_case['Value'] = base_case['Value'].round(2)
+    base_case['Value'] = base_case['Value'].round(2)        
     higher_receipt['Value'] = higher_receipt['Value'].round(2)
 
     # Create lists to hold unique names of Metric, Attribute, and Scenario
@@ -145,8 +160,21 @@ def main():
                             template="seaborn",
                             height=400,
                             width=500,
-                            hover_name = "Description",
+                            # hover_data= ['Example'],
+                            hover_name= 'Example'
                             )
+
+        # # Customize hover template to control shape and appearance of the hover box
+        # hover_template = (
+        #     "<b>Example</b>: %{customdata[0]}<extra></extra>"
+        # )
+        # higher_chart.update_traces(hovertemplate=hover_template)
+
+        # Add grid lines to the x-axis and y-axis
+        higher_chart.update_layout(
+            xaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1),
+            yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1)
+        )
 
         # Add grid lines to the x-axis and y-axis
         higher_chart.update_layout(xaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1),
@@ -170,13 +198,8 @@ def main():
 
         # Adjust axis limits
         higher_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
-        
-        # Customize the hover template
-        # higher_chart.update_traces(
-        # hovertemplate='<b>Industry Description</b>: %{y}' +
-        #               '<br><b>Value</b>: %{x:,}<extra></extra>')
 
-        higher_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
+        # higher_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
 
         higher_chart.update_layout(font_family="Arial", title_font_family = "Arial")
 
@@ -194,8 +217,14 @@ def main():
                             template="seaborn",
                             height=400,
                             width=500,
-                            hover_name = "Description",
+                            hover_name= 'Example',
                             )
+
+        # # Customize hover template to control shape and appearance of the hover box
+        # hover_template = (
+        #     "<b>Example</b>: %{customdata[0]}<extra></extra>"
+        # )
+        # base_chart.update_traces(hovertemplate=hover_template)
 
         # Add grid lines to the x-axis and y-axis
         base_chart.update_layout(xaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1),
@@ -219,13 +248,8 @@ def main():
 
         # Adjust axis limits
         base_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
-        
-        # Customize the hover template
-        # base_chart.update_traces(
-        # hovertemplate='<b>Industry Description</b>: %{y}' +
-        #               '<br><b>Value</b>: %{x:,}<extra></extra>')
 
-        base_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
+        # base_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
 
         base_chart.update_layout(font_family="Arial", title_font_family = "Arial")
 
