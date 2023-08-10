@@ -148,12 +148,10 @@ def main():
                             hover_name = "Description",
                             )
 
-        higher_chart.update_layout(hovermode="y")
-
         # Add grid lines to the x-axis and y-axis
         higher_chart.update_layout(xaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1),
                                 yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
-
+        
         higher_chart.update_layout(title={'text': "Higher Receipt Rate",
                                 'y':0.95,
                                 'x':0.55,
@@ -172,8 +170,8 @@ def main():
 
         # Adjust axis limits
         higher_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
-
-        # # Customize the hover template
+        
+        # Customize the hover template
         # higher_chart.update_traces(
         # hovertemplate='<b>Industry Description</b>: %{y}' +
         #               '<br><b>Value</b>: %{x:,}<extra></extra>')
