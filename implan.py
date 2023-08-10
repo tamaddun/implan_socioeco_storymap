@@ -49,7 +49,7 @@ def main():
     data = data[data["Metric"].isin(["Jobs", "Labor Income", "Total Production Value"])]
 
     # Rename industries
-    data['Industry'] = data['Industry'].replace({'TIPU (Transportation, Information, Power and Utilities)':'Transportation and Utilities'})
+    data['Industry'] = data['Industry'].replace({'TIPU (Transportation, Information, Power and Utilities)':'Transportation, Information, and Utilities'})
 
     # Update industry values to group them
     industry_mapping = {
@@ -119,11 +119,54 @@ def main():
     higher_receipt = higher_receipt[higher_receipt['Metric']==metric_seletion]
 
     # Create two columns for the plots
-    # col1, col2, col3 = st.columns([5,1,5],gap='small')
-    col1, col2 = st.columns(2,gap='large')
+    col1, col2, col3, col4, col5 = st.columns([1,5,0.25,5,1],gap='small')
+    # col1, col2 = st.columns(2,gap='large')
+
+    # Display the higher receipt bar chart in the second column
+    with col4:
+        higher_chart = px.bar(higher_receipt,
+                            x='Value',
+                            y='Industry',
+                            animation_frame='Year',
+                            color_discrete_sequence=['rgb(14, 166, 223)'],
+                            # 14, 166, 223; 7, 90, 120; 0, 127, 113; 122, 197, 67; 247, 227, 208; 243, 110, 33; 156, 28, 74
+                            orientation='h',
+                            template="seaborn",
+                            height=400,
+                            width=500)
+
+        higher_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
+
+        higher_chart.update_layout(title={'text': "Higher Receipt Rate",
+                                'y':0.95,
+                                'x':0.55,
+                                'xanchor': 'center',
+                                'yanchor': 'top',})
+
+        higher_chart.update_layout(title_font_color='rgb(7, 90, 120)')
+        higher_chart.update_layout(title_font_size=20)
+
+        # Change label styles
+        higher_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+        higher_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+
+        # Sort industry names alphabetically
+        higher_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
+
+        # Adjust axis limits
+        higher_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
+
+        # Customize the hover template
+        higher_chart.update_traces(
+        hovertemplate='<b>Industry Description</b>: %{y}' +
+                      '<br><b>Value</b>: %{x:,}<extra></extra>')
+
+        higher_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
+
+        st.plotly_chart(higher_chart, use_container_width=True)
 
     # Display the base case bar chart in the first column
-    with col1:
+    with col2:
         base_chart = px.bar(base_case,
                             x='Value',
                             y='Industry',
@@ -148,66 +191,23 @@ def main():
         base_chart.update_layout(title_font_size=20)
 
         # Change label styles
-        base_chart.update_layout(xaxis=dict(title=dict(text="Value",font=dict(color="rgb(128, 128, 128)",size=12))))
-        base_chart.update_layout(yaxis=dict(title=dict(text="Industry",font=dict(color="rgb(128, 128, 128)",size=12))))
+        base_chart.update_layout(xaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+        base_chart.update_layout(yaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
 
         # Sort industry names alphabetically
         base_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
 
         # Adjust axis limits
-        base_chart.update(layout_xaxis_range=[base_case['Value'].min(), base_case['Value'].max() + base_case['Value'].max() / 20])
+        base_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
         
         # Customize the hover template
         base_chart.update_traces(
-        hovertemplate='<b>Industry</b>: %{y}' +
+        hovertemplate='<b>Industry Description</b>: %{y}' +
                       '<br><b>Value</b>: %{x:,}<extra></extra>')
 
         base_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
 
         st.plotly_chart(base_chart, use_container_width=True)
-
-    # Display the higher receipt bar chart in the second column
-    with col2:
-        higher_chart = px.bar(higher_receipt,
-                            x='Value',
-                            y='Industry',
-                            animation_frame='Year',
-                            color_discrete_sequence=['rgb(14, 166, 223)'],
-                            # 14, 166, 223; 7, 90, 120; 0, 127, 113; 122, 197, 67; 247, 227, 208; 243, 110, 33; 156, 28, 74
-                            orientation='h',
-                            template="seaborn",
-                            height=400,
-                            width=500)
-
-        higher_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
-
-        higher_chart.update_layout(title={'text': "Higher Receipt",
-                                'y':0.95,
-                                'x':0.55,
-                                'xanchor': 'center',
-                                'yanchor': 'top',})
-
-        higher_chart.update_layout(title_font_color='rgb(7, 90, 120)')
-        higher_chart.update_layout(title_font_size=20)
-
-        # Change label styles
-        higher_chart.update_layout(xaxis=dict(title=dict(text="Value",font=dict(color="rgb(128, 128, 128)",size=12))))
-        higher_chart.update_layout(yaxis=dict(title=dict(text="Industry",font=dict(color="rgb(128, 128, 128)",size=12))))
-
-        # Sort industry names alphabetically
-        higher_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
-
-        # Adjust axis limits
-        higher_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
-
-                # Customize the hover template
-        higher_chart.update_traces(
-        hovertemplate='<b>Industry</b>: %{y}' +
-                      '<br><b>Value</b>: %{x:,}<extra></extra>')
-
-        higher_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
-
-        st.plotly_chart(higher_chart, use_container_width=True)
 
 if __name__ == "__main__":
     main()
