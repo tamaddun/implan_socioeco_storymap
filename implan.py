@@ -168,7 +168,7 @@ def main():
             hoverlabel=dict(
                 bgcolor="white",
                 font_size=10,
-                font_family="Arial"
+                font_family="Arial",
             )
         )
 
