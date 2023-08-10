@@ -132,7 +132,7 @@ def main():
                             # 14, 166, 223; 7, 90, 120; 0, 127, 113; 122, 197, 67; 247, 227, 208; 243, 110, 33; 156, 28, 74
                             orientation='v',
                             template="seaborn",
-                            height=600,
+                            height=500,
                             width=400)
 
         higher_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
@@ -179,7 +179,7 @@ def main():
                             # 14, 166, 223; 7, 90, 120; 0, 127, 113; 122, 197, 67; 247, 227, 208; 243, 110, 33; 156, 28, 74
                             orientation='v',
                             template="seaborn",
-                            height=600,
+                            height=500,
                             width=400)
 
         base_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
