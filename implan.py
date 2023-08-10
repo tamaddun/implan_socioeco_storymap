@@ -20,6 +20,9 @@ def main():
     # Clean the data
     data.drop(['Unnamed: 0'],axis=1,inplace=True) # Redundant column
 
+    # Filter rows where 'Attribute' is either 'Direct' or 'Total'
+    data = data[data['Attribute'].isin(['Direct', 'Total'])]
+
     # Rename years
     # Create a dictionary to map years to their corresponding values
     year_mapping = {
@@ -80,6 +83,10 @@ def main():
     base_case = dataframes_by_scenario['Base Case']
     higher_receipt = dataframes_by_scenario['Higher Receipt']
 
+    # Create the "Description" column and fill it with "Description from Karen"
+    base_case['Description'] = 'Description from Karen'
+    higher_receipt['Description'] = 'Description from Karen'
+
     # Round the 'Value' column to the nearest integer
     base_case['Value'] = base_case['Value'].round(2)
     higher_receipt['Value'] = higher_receipt['Value'].round(2)
@@ -97,9 +104,13 @@ def main():
     with col2:
         st.markdown(
             """
-            <div style="text-align: center;">
-                <h3>Potential Economic Effects across the Life Cycle of a Storage Facility</h3>
-            </div>
+            <style>
+            h3 {
+                font-family: 'Karla', sans-serif;
+                text-align: center;
+            }
+            </style>
+            <h3>Potential Economic Effects across the Life Cycle of a Storage Facility</h3>
             """,
             unsafe_allow_html=True,
         )
@@ -119,7 +130,7 @@ def main():
     higher_receipt = higher_receipt[higher_receipt['Metric']==metric_seletion]
 
     # Create two columns for the plots
-    col1, col2, col3, col4, col5 = st.columns([1,5,0.25,5,1],gap='small')
+    col1, col2, col3, col4, col5 = st.columns([.5,5,0.25,5,1],gap='small')
     # col1, col2 = st.columns(2,gap='large')
 
     # Display the higher receipt bar chart in the second column
@@ -133,9 +144,15 @@ def main():
                             orientation='h',
                             template="seaborn",
                             height=400,
-                            width=500)
+                            width=500,
+                            hover_name = "Description",
+                            )
 
-        higher_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
+        higher_chart.update_layout(hovermode="y")
+
+        # Add grid lines to the x-axis and y-axis
+        higher_chart.update_layout(xaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1),
+                                yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
 
         higher_chart.update_layout(title={'text': "Higher Receipt Rate",
                                 'y':0.95,
@@ -156,12 +173,14 @@ def main():
         # Adjust axis limits
         higher_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
 
-        # Customize the hover template
-        higher_chart.update_traces(
-        hovertemplate='<b>Industry Description</b>: %{y}' +
-                      '<br><b>Value</b>: %{x:,}<extra></extra>')
+        # # Customize the hover template
+        # higher_chart.update_traces(
+        # hovertemplate='<b>Industry Description</b>: %{y}' +
+        #               '<br><b>Value</b>: %{x:,}<extra></extra>')
 
         higher_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
+
+        higher_chart.update_layout(font_family="Arial", title_font_family = "Arial")
 
         st.plotly_chart(higher_chart, use_container_width=True)
 
@@ -176,11 +195,14 @@ def main():
                             orientation='h',
                             template="seaborn",
                             height=400,
-                            width=500)
+                            width=500,
+                            hover_name = "Description",
+                            )
 
-        base_chart.update_layout(yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
+        # Add grid lines to the x-axis and y-axis
+        base_chart.update_layout(xaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1),
+                                yaxis=dict(gridcolor='rgb(220, 220, 220)', gridwidth=1))
         
-
         base_chart.update_layout(title={'text': "Base Case",
                                 'y':0.95,
                                 'x':0.55,
@@ -201,11 +223,13 @@ def main():
         base_chart.update(layout_xaxis_range=[higher_receipt['Value'].min(), higher_receipt['Value'].max() + higher_receipt['Value'].max() / 20])
         
         # Customize the hover template
-        base_chart.update_traces(
-        hovertemplate='<b>Industry Description</b>: %{y}' +
-                      '<br><b>Value</b>: %{x:,}<extra></extra>')
+        # base_chart.update_traces(
+        # hovertemplate='<b>Industry Description</b>: %{y}' +
+        #               '<br><b>Value</b>: %{x:,}<extra></extra>')
 
         base_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
+
+        base_chart.update_layout(font_family="Arial", title_font_family = "Arial")
 
         st.plotly_chart(base_chart, use_container_width=True)
 
