@@ -94,7 +94,7 @@ def main():
         'Government':
                 'Example: Federal, local, and state government agencies,<br>including education, military, transit, and public health',
         'Construction':
-                'Example: Commercial and residential structures,<br>road construction and maintenance, power<br>and communication structures'
+                'Example: Commercial and residential structures,<br>road construction and maintenance,power and<br>communication structures'
     }
     # Update 'Description' column for base_case DataFrame
     base_case['Example'] = base_case['Industry'].map(industry_descriptions)
@@ -145,7 +145,7 @@ def main():
     higher_receipt = higher_receipt[higher_receipt['Metric']==metric_seletion]
 
     # Create two columns for the plots
-    col1, col2, col3, col4, col5 = st.columns([.5,5,0.25,5,1],gap='small')
+    col1, col2, col3, col4, col5 = st.columns([0.25,5,0.25,5,0.5],gap='small')
     # col1, col2 = st.columns(2,gap='large')
 
     # Display the higher receipt bar chart in the second column
@@ -164,10 +164,17 @@ def main():
                             hover_name= 'Example'
                             )
 
+        higher_chart.update_layout(
+            hoverlabel=dict(
+                bgcolor="white",
+                font_size=10,
+                font_family="Arial"
+            )
+        )
+
         # # Customize hover template to control shape and appearance of the hover box
         # hover_template = (
-        #     "<b>Example</b>: %{customdata[0]}<extra></extra>"
-        # )
+        #     "<b>Example</b>: %{customdata[0]}<extra></extra>")
         # higher_chart.update_traces(hovertemplate=hover_template)
 
         # Add grid lines to the x-axis and y-axis
@@ -220,10 +227,16 @@ def main():
                             hover_name= 'Example',
                             )
 
+        base_chart.update_layout(
+            hoverlabel=dict(
+                bgcolor="white",
+                font_size=10,
+                font_family="Arial"
+            )
+        )
         # # Customize hover template to control shape and appearance of the hover box
         # hover_template = (
-        #     "<b>Example</b>: %{customdata[0]}<extra></extra>"
-        # )
+        #     "<b>Example</b>: %{customdata[0]}<extra></extra>")
         # base_chart.update_traces(hovertemplate=hover_template)
 
         # Add grid lines to the x-axis and y-axis
