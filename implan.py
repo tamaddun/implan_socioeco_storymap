@@ -145,7 +145,7 @@ def main():
     higher_receipt = higher_receipt[higher_receipt['Metric']==metric_seletion]
 
     # Create two columns for the plots
-    col1, col2, col3, col4, col5 = st.columns([0.25,5,0.25,5,0.5],gap='small')
+    col1, col2, col3, col4, col5 = st.columns([0.25,3,0.15,3,0.5],gap='small')
     # col1, col2 = st.columns(2,gap='large')
 
     # Display the higher receipt bar chart in the second column
