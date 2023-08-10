@@ -191,8 +191,8 @@ def main():
         base_chart.update_layout(title_font_size=20)
 
         # Change label styles
-        base_chart.update_layout(xaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
-        base_chart.update_layout(yaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+        base_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+        base_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
 
         # Sort industry names alphabetically
         base_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
