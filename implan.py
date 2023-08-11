@@ -46,10 +46,10 @@ def main():
     data['Metric'] = data['Metric'].str.slice(start=2)
 
     # Rename and select metrics
-    data['Metric'] = data['Metric'].replace({'Employment': 'Jobs',
-                                            'LaborIncome':'Labor Income',
-                                            'Output':'Total Production Value'})
-    data = data[data["Metric"].isin(["Jobs", "Labor Income", "Total Production Value"])]
+    data['Metric'] = data['Metric'].replace({'Employment': 'Number of Jobs',
+                                            'LaborIncome':'Labor Income ($)',
+                                            'Output':'Total Production Value ($)'})
+    data = data[data["Metric"].isin(["Number of Jobs", "Labor Income ($)", "Total Production Value ($)"])]
 
     # Rename industries
     data['Industry'] = data['Industry'].replace({'TIPU (Transportation, Information, Power and Utilities)':'Transportation, Information, and Utilities'})
@@ -86,7 +86,7 @@ def main():
     # Create a dictionary to store industry descriptions
     industry_descriptions = {
         'Transportation, Information, and Utilities':
-                'Example: Air and ground transportation, Internet service,<br>telephone and satellite communications, publishing, power<br>generation and distribution, water treatment and distribution',
+                'Example: Air and ground transportation, internet service,<br>telephone and satellite communications, publishing, power<br>generation and distribution, water treatment and distribution',
         'Service and Trade':
                 'Example: Health care, performing arts, professional<br>services, retail and wholesale businesses',
         'Mining, Manufacturing, and Agriculture':
