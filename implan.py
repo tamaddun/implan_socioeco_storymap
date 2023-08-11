@@ -136,8 +136,8 @@ def main():
 
     # Create selection options
     with col2:
-        metric_seletion = st.selectbox('Select an Effect',metric)
-        attribute_selection = st.selectbox('Select Scale of Effect',attribute)
+        metric_seletion = st.selectbox('Select an Effect',metric, index=1)
+        attribute_selection = st.selectbox('Select Scale of Effect',attribute, index=0)
 
     base_case = base_case[base_case['Attribute']==attribute_selection]
     base_case = base_case[base_case['Metric']==metric_seletion]
