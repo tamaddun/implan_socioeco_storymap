@@ -124,6 +124,7 @@ def main():
             h3 {
                 font-family: 'Karla', sans-serif;
                 text-align: center;
+                color: #075a78; /* Set your desired color here */
             }
             </style>
             <h3>Potential Economic Effects across the Life Cycle of a Storage Facility</h3>
@@ -198,8 +199,8 @@ def main():
         higher_chart.update_layout(title_font_size=20)
 
         # Change label styles
-        higher_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
-        higher_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+        higher_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(7, 90, 120)",size=14))))
+        higher_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(7, 90, 120)",size=14))))
 
         # Sort industry names alphabetically
         higher_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
@@ -257,8 +258,8 @@ def main():
         base_chart.update_layout(title_font_size=20)
 
         # Change label styles
-        base_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
-        base_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(14, 166, 223)",size=12))))
+        base_chart.update_layout(xaxis=dict(title=dict(text="<b>Value</b>",font=dict(color="rgb(7, 90, 120)",size=14))))
+        base_chart.update_layout(yaxis=dict(title=dict(text="<b>Industry</b>",font=dict(color="rgb(7, 90, 120)",size=14))))
 
         # Sort industry names alphabetically
         base_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
@@ -274,6 +275,63 @@ def main():
         base_chart.update_layout(sliders=sliders)
 
         st.plotly_chart(base_chart, use_container_width=True)
+
+    col1, col2, col3 = st.columns([1, 1, 1])
+    with col2:
+        st.write("")
+        agree = st.checkbox('Read examples from each industry')
+        
+        if agree:
+            description = """
+            <div style="font-family: 'Arial', sans-serif; font-size: 14px;">
+            <strong style="color: #075a78;">Transportation, Information, and Utilities:</strong> Air and ground transportation, internet service, 
+            telephone and satellite communications, publishing, power generation and distribution, water
+            treatment and distribution
+            </div>
+
+            <div style="font-family: 'Arial', sans-serif; font-size: 14px; margin-top: 10px;">
+            <strong style="color: #075a78;">Service and Trade:</strong> Health care, performing arts, professional services, retail and wholesale businesses
+            </div>
+
+            <div style="font-family: 'Arial', sans-serif; font-size: 14px; margin-top: 10px;">
+            <strong style="color: #075a78;">Mining, Manufacturing, and Agriculture:</strong> Coal and metals mining, oil and gas production, materials and
+            goods manufacturing, beverage production, bakeries, farming, forestry
+            </div>
+
+            <div style="font-family: 'Arial', sans-serif; font-size: 14px; margin-top: 10px;">
+            <strong style="color: #075a78;">Government:</strong> Federal, local, and state government agencies, including education, military, transit,
+            and public health
+            </div>
+
+            <div style="font-family: 'Arial', sans-serif; font-size: 14px; margin-top: 10px;">
+            <strong style="color: #075a78;">Construction:</strong> Commercial and residential structures, road construction and maintenance, power and
+            communication structures
+            </div>
+            """
+            st.markdown(description, unsafe_allow_html=True)
+            
+    # with col2:
+    #     if st.button('Read Industry Descriptions/Examples'):
+    #         st.write(
+    #             """
+    #         Transportation, Information, and Utilities: Air and ground transportation, internet service, 
+    #         telephone and satellite communications, publishing, power generation and distribution, water
+    #         treatment and distribution
+            
+    #         Service and Trade: Health care, performing arts, professional services, retail and wholesale businesses
+
+    #         Mining, Manufacturing, and Agriculture: Coal and metals mining, oil and gas production, materials and
+    #         goods manufacturing, beverage production, bakeries, farming, forestry
+
+    #         Government: Federal, local, and state government agencies, including education, military, transit,
+    #         and public health
+
+    #         Construction: Commercial and residential structures, road construction and maintenance, power and
+    #         communication structures
+    #         """
+    #         )
+    #     else:
+    #         st.write('')
 
 if __name__ == "__main__":
     main()
