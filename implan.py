@@ -211,6 +211,9 @@ def main():
 
         higher_chart.update_layout(font_family="Arial", title_font_family = "Arial")
 
+        sliders = [dict(font_size=10,font_family="Arial")]
+        higher_chart.update_layout(sliders=sliders)
+
         st.plotly_chart(higher_chart, use_container_width=True)
 
     # Display the base case bar chart in the first column
@@ -266,6 +269,9 @@ def main():
         # base_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
 
         base_chart.update_layout(font_family="Arial", title_font_family = "Arial")
+
+        sliders = [dict(font_size=10,font_family="Arial")]
+        base_chart.update_layout(sliders=sliders)
 
         st.plotly_chart(base_chart, use_container_width=True)
 
