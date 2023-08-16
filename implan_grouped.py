@@ -109,7 +109,7 @@ def main():
                 color: #075a78; /* Set your desired color here */
             }
             </style>
-            <h3>Potential Economic Effects Across the Life Cycle of a Storage Facility</h3>
+            <h3>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h3>
             """,
             unsafe_allow_html=True,
         )
