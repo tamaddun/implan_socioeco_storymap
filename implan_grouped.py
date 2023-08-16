@@ -173,7 +173,15 @@ def main():
         base_chart.update_layout(yaxis=dict(categoryorder='category ascending'))
 
         # Adjust axis limits
-        base_chart.update(layout_xaxis_range=[data3['Value'].min(), data3['Value'].max() + data3['Value'].max() / 20])
+        base_chart.update(layout_xaxis_range=[data3['Value'].min(), data3['Value'].max() + data3['Value'].max() / 50])
+
+        # base_chart.update_layout(legend=dict(
+        # orientation="v",
+        # yanchor="bottom",
+        # y=0.5,
+        # xanchor="right",
+        # x=1
+        # ))
 
         # base_chart.update_layout(annotations=[dict(x=0.5, y=-0.32, text="(Values represent annual average impact at every 5-year interval)", font=dict(size=12),showarrow=False, xref='paper', yref='paper')])
 
