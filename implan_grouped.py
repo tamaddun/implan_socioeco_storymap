@@ -139,7 +139,7 @@ def main():
                             # 14, 166, 223; 7, 90, 120; 0, 127, 113; 122, 197, 67; 247, 227, 208; 243, 110, 33; 156, 28, 74
                             orientation='h',
                             template="seaborn",
-                            height=500,
+                            height=400,
                             width=500,
                             hover_name= 'Example',
                             )
