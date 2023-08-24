@@ -96,7 +96,7 @@ def main():
     # Set the page title and header
     st.set_page_config(page_title="Economic Effects of Storage Facility", layout="wide")
 
-    col1, col2, col3 = st.columns([0.5, 3, 0.5])
+    col1, col2, col3 = st.columns([0.5, 4, 0.5])
 
     # Set the page title and header with center-aligned subheader text
     with col2:
@@ -109,7 +109,7 @@ def main():
                 color: #075a78; /* Set your desired color here */
             }
             </style>
-            <h3>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h3>
+            <h2>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h2>
             """,
             unsafe_allow_html=True,
         )
