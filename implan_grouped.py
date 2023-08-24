@@ -94,7 +94,7 @@ def main():
     metric = data3['Metric'].unique().tolist()
 
     # Set the page title and header
-    st.set_page_config(page_title="Economic Effects of Storage Facility", layout="centered")
+    st.set_page_config(page_title="Economic Effects of Storage Facility", layout="wide")
 
     col1, col2, col3 = st.columns([0.5, 4, 0.5])
 
