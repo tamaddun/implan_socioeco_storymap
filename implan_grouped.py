@@ -101,7 +101,7 @@ def main():
         """
         <style>
         .reportview-container .main {
-            padding-top: -1rem; /* Adjust this value to move the content upwards */
+            padding-top: -10rem; /* Adjust this value to move the content upwards */
         }
         </style>
         """,
