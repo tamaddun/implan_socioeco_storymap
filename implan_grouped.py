@@ -96,18 +96,6 @@ def main():
     # Set the page title and header
     st.set_page_config(page_title="Economic Effects of Storage Facility", layout="wide")
 
-    # Add custom CSS to adjust margins and move contents upwards
-    st.markdown(
-        """
-        <style>
-        .reportview-container .main {
-            padding-top: -10rem; /* Adjust this value to move the content upwards */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
     col1, col2, col3 = st.columns([0.5, 4, 0.5])
 
     # Set the page title and header with center-aligned subheader text
