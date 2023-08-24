@@ -96,7 +96,7 @@ def main():
     # Set the page title and header
     st.set_page_config(page_title="Economic Effects of Storage Facility", layout="wide")
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([0.5, 3, 0.5])
 
     # Set the page title and header with center-aligned subheader text
     with col2:
@@ -125,7 +125,7 @@ def main():
     data3 = data3[data3['Attribute']==attribute_selection]
     data3 = data3[data3['Metric']==metric_seletion]
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([0.5, 3, 0.5])
 
     # Display the base case bar chart in the first column
     with col2:
