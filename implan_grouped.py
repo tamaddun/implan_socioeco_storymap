@@ -163,7 +163,7 @@ def main():
                                 'yanchor': 'top',})
 
         base_chart.update_layout(title_font_color='rgb(7, 90, 120)')
-        base_chart.update_layout(title_font_size=20)
+        base_chart.update_layout(title_font_size=16)
 
         # Change label styles
         base_chart.update_layout(xaxis=dict(title=dict(text="<b>Effect</b>",font=dict(color="rgb(7, 90, 120)",size=14))))
