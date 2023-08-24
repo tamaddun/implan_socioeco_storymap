@@ -94,7 +94,7 @@ def main():
     metric = data3['Metric'].unique().tolist()
 
     # Set the page title and header
-    st.set_page_config(page_title="Economic Effects of Storage Facility", layout="wide")
+    st.set_page_config(page_title="Economic Effects of Storage Facility", layout="centered")
 
     col1, col2, col3 = st.columns([0.5, 4, 0.5])
 
@@ -109,7 +109,7 @@ def main():
                 color: #075a78; /* Set your desired color here */
             }
             </style>
-            <h2>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h2>
+            <h4>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h4>
             """,
             unsafe_allow_html=True,
         )
