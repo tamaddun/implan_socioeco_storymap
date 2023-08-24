@@ -103,13 +103,13 @@ def main():
         st.markdown(
             """
             <style>
-            h4 {
+            h5 {
                 font-family: 'Karla', sans-serif;
                 text-align: center;
                 color: #075a78; /* Set your desired color here */
             }
             </style>
-            <h4>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h4>
+            <h5>Potential Economic Effects Across the Life Cycle of an Interim Storage Facility</h5>
             """,
             unsafe_allow_html=True,
         )
