@@ -103,7 +103,7 @@ def main():
         st.markdown(
             """
             <style>
-            h3 {
+            h2 {
                 font-family: 'Karla', sans-serif;
                 text-align: center;
                 color: #075a78; /* Set your desired color here */
